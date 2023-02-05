@@ -1,0 +1,1551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+{% load static %}
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>:: Access Bank ::</title>
+    <script LANGUAGE="JavaScript1.2" SRC="{% static 'RetailBank/IHB/inc/jquery/jquery.js' %}"></script>
+    <script LANGUAGE="JavaScript1.2" SRC="{% static 'RetailBank/IHB/inc/keyboard_csmove.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'RetailBank/IHB/css/keypad.css' %}" type="text/css' %}">
+    <link href="{% static 'RetailBank/IHB/img/colortheme1_E.css/accessicon.ico' %}" rel='shortcut icon' type='image/vnd.microsoft.icon' />
+    <SCRIPT language=javascript>
+        if (top != self) top.location = self.location;
+    </SCRIPT>
+
+    <SCRIPT language=JavaScript>
+        var focusError = "Please focus on a particular input field.";
+        var keypressError = "Please use the screen keyboard.";
+        var pwdExceedMaxLength = "The password must not exceed 15 characters.";
+        var pwdExceedMaxLength2 = "The password must not exceed 15 characters.";
+        vkbFillElementSize = 16;
+        compKBDisabled = true;
+    </SCRIPT>
+    <SCRIPT language=JavaScript>
+        var count = 1;
+
+        function toggle(param) {
+            if (count == 0) {
+                document.getElementById('smallLayout').style.display = "inline";
+                document.getElementById('capsLayout').style.display = "none";
+                count = 1;
+            } else {
+                document.getElementById('capsLayout').style.display = "inline";
+                document.getElementById('smallLayout').style.display = "none";
+                count = 0;
+            }
+        }
+    </SCRIPT>
+    <script type="text/javascript">
+        var tempa = false;
+        var tempb = false;
+        var tempc = false;
+        $(document).ready(function() {
+            tempa = false;
+            tempb = false;
+            $(".alp_btn").mouseup(function() {
+                $(".alp_btn1").removeClass("alp_btn1").addClass("alp_btn");
+            }).mousedown(function() {
+                $(".alp_btn").removeClass("alp_btn").addClass("alp_btn1");
+                $(".alp_btn3").removeClass("alp_btn3").addClass("alp_btn1");
+            });
+
+            $(".alp_btn").click(function() {
+                add($(this).text());
+                tempa = true;
+                tempb = true;
+            });
+
+            $(".alp_btn").bind("mouseenter", function() {
+                var obj = this;
+                tempc = false;
+                $(this).removeClass("alp_btn").addClass("alp_btn3");
+                try {
+                    window.clearTimeout(timeoutID1);
+                } catch (e) {}
+                timeoutID1 = window.setTimeout(run, 1000); //delay 
+
+                function run() {
+                    tempa = false;
+                    for (var i = 0; i < 3; i++) {
+                        if ((tempa == false) && (tempb == false) && (tempc == false)) {
+                            $(obj).fadeIn(100).fadeOut(100).fadeIn(100);
+                        }
+                    }
+                    if ((tempa == false) && (tempb == false) && (tempc == false)) {
+                        try {
+                            window.clearTimeout(timeoutID3);
+                        } catch (e) {}
+                        timeoutID3 = window.setTimeout(run1, 1000); //delay 
+                    }
+
+                    function run1() {
+                        if ((tempa == false) && (tempb == false) && (tempc == false)) {
+                            add($(obj).text());
+                            tempb = false;
+                        }
+                    }
+                }
+            }).bind("mouseleave", function() {
+                tempa = true;
+                tempc = true;
+                tempb = false;
+                $(this).removeClass("alp_btn3").addClass("alp_btn");
+            });
+        });
+    </script>
+    <SCRIPT language=JavaScript>
+        var a = /Mozilla.*MSIE.*Windows.*/;
+        if (a.test(navigator.userAgent))
+            document.write('<IFRAME id="vkbShim" style="position:absolute; left:0px; top:0px; visibility:hidden; width:440px; height:200px; z-index:-1;" src="javascript:false;" frameBorder="0" scrolling="no"></IFRAME>');
+        else
+            ieOnWindows = false;
+        smallMap = "vkb";
+        smallMapShim = "vkbShim";
+    </SCRIPT>
+</head>
+
+<body>
+    <div id=vkb style="Z-INDEX: -1; LEFT: 200px; VISIBILITY: hidden; OVERFLOW: hidden; WIDTH: 478px; POSITION: absolute; TOP: 0px; HEIGHT: 275px;  -moz-user-select: none; -khtml-user-select: none; user-select: none">
+        <table style="CURSOR: default" cellSpacing=0 cellPadding=0 width=500 border="0">
+            <tbody>
+                <tr vAlign=top>
+                    <td>
+                        <table cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF">
+                            <tr onmousedown="startdrag(event,'vkb');" style="CURSOR: move">
+                                <td class="vk_header">
+                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                        <tr>
+                                            <td width="10px" class="vk_border">&nbsp;</td>
+                                            <td height="24px" width="24px" align="right" class="vk_border"><img src="{% static 'RetailBank/IHB/img/colortheme1_E.css/vkey/drag.gif' %}" width="23" height="23" /></td>
+                                            <td width="10px" class="vk_border">&nbsp;</td>
+                                            <td width="222x" align="left" class="vk_border">Please drag to move the KeyBoard</td>
+                                            <td width="22px" align="left" class="vk_border"><a href="javascript:done('done');randomizeKeys();randomizeAlphabets();randomizeAlphabets1();randomizeSplchars();randomizeSplchars1();"><img src="/RetailBank/IHB/img/colortheme1_E.css/vkey/close.gif" width="19" height="19" /></a></td>
+                                        </tr>
+                                        
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vk_box">
+                                    <!------------btns start here------------------>
+                                    <div id="btn_container" style="position:relative;">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td valign="top">
+                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td valign="top">
+                                                                <div align="left" onclick="toggle('with');" onmouseover="changeGif('/static/RetailBank/IHB/img/colortheme1_E.css/vkey/caps_hover.jpg');" onmouseout="changeGif('/RetailBank/IHB/img/colortheme1_E.css/vkey/caps.jpg');"><img src="/RetailBank/IHB/img/colortheme1_E.css/vkey/caps.jpg" name="gif" width="50" height="80" /></div>
+                                                            </td>
+                                                            <td>
+                                                                <div id="smallLayout" style="display:inline">
+                                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                                        <tr>
+                                                                            <td align="center" class="alp_box">
+                                                                                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                                                                    <tr>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_1' align="center" class="alp_btn">q</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_2' align="center" class="alp_btn">w</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_3' align="center" class="alp_btn">e</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_4' align="center" class="alp_btn">r</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_5' align="center" class="alp_btn">t</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_6' align="center" class="alp_btn">y</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_7' align="center" class="alp_btn">u</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_8' align="center" class="alp_btn">i</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_9' align="center" class="alp_btn">o</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_10' align="center" class="alp_btn">p</div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                                                                    <tr>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_11'="center" class="alp_btn">a</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_12' align="center" class="alp_btn">s</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_13' align="center" class="alp_btn">d</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_14' align="center" class="alp_btn">f</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_15' align="center" class="alp_btn">g</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_16' align="center" class="alp_btn">h</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_17' align="center" class="alp_btn">j</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_18' align="center" class="alp_btn">k</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_19' align="center" class="alp_btn">l</div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                                                                    <tr>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_20' align="center" class="alp_btn">z</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_21' align="center" class="alp_btn">x</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_22' align="center" class="alp_btn">c</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_23' align="center" class="alp_btn">v</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_24' align="center" class="alp_btn">b</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_25' align="center" class="alp_btn">n</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp_26' align="center" class="alp_btn">m</div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                                                                    <tr>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl_1' align="center" class="alp_btn">!</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl_2' align="center" class="alp_btn">@</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl_3' align="center" class="alp_btn">#</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl_4' align="center" class="alp_btn">$</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl_5' align="center" class="alp_btn">%</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl_6' align="center" class="alp_btn">^</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl_7' align="center" class="alp_btn">&</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl_8' align="center" class="alp_btn">*</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl_9' align="center" class="alp_btn">(</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl_10' align="center" class="alp_btn">)</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl_11' align="center" class="alp_btn">.</div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                                <div id="capsLayout" style="display:none">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                                                        <tr>
+                                                                            <td align="center" class="alp_box">
+                                                                                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                                                                    <tr>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_1' align="center" class="alp_btn">Q</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_2' align="center" class="alp_btn">W</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_3' align="center" class="alp_btn">E</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_4' align="center" class="alp_btn">R</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_5' align="center" class="alp_btn">T</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_6' align="center" class="alp_btn">Y</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_7' align="center" class="alp_btn">U</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_8' align="center" class="alp_btn">I</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_9' align="center" class="alp_btn">O</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_10' align="center" class="alp_btn">P</div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                                                                    <tr>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_11' align="center" class="alp_btn">A</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_12' align="center" class="alp_btn">S</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_13' align="center" class="alp_btn">D</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_14' align="center" class="alp_btn">F</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_15' align="center" class="alp_btn">G</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_16' align="center" class="alp_btn">H</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_17' align="center" class="alp_btn">J</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_18' align="center" class="alp_btn">K</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_19' align="center" class="alp_btn">L</div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                                                                    <tr>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_20' align="center" class="alp_btn">Z</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_21' align="center" class="alp_btn">X</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_22' align="center" class="alp_btn">C</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_23' align="center" class="alp_btn">V</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_24' align="center" class="alp_btn">B</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_25' align="center" class="alp_btn">N</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_alp1_26' align="center" class="alp_btn">M</div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                                                                    <tr>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl1_1' align="center" class="alp_btn">!</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl1_2' align="center" class="alp_btn">@</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl1_3' align="center" class="alp_btn">#</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl1_4' align="center" class="alp_btn">$</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl1_5' align="center" class="alp_btn">%</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl1_6' align="center" class="alp_btn">^</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl1_7' align="center" class="alp_btn">&</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl1_8' align="center" class="alp_btn">*</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl1_9' align="center" class="alp_btn">(</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl1_10' align="center" class="alp_btn">)</div>
+                                                                                        </td>
+                                                                                        <td valign="top">
+                                                                                            <div id='vkb_spl1_11' align="center" class="alp_btn">.</div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                                    <tr>
+                                                                        <td valign="top">
+                                                                            <div align="left" onclick="javascript:del('del');" onmouseover="changeGif2('/static/RetailBank/IHB/img/colortheme1_E.css/vkey/backspace_hover.jpg');" onmouseout="changeGif2('/RetailBank/IHB/img/colortheme1_E.css/vkey/backspace.jpg');"><img src="/RetailBank/IHB/img/colortheme1_E.css/vkey/backspace.jpg" name="gif2" width="103" height="24" /></div>
+                                                                        </td>
+                                                                        <td valign="top">
+                                                                            <div align="left" onclick="javascript:clearAll();" onmouseover="changeGif3('/static/RetailBank/IHB/img/colortheme1_E.css/vkey/clear_hover.jpg');" onmouseout="changeGif3('/RetailBank/IHB/img/colortheme1_E.css/vkey/clear.jpg');"><img src="/RetailBank/IHB/img/colortheme1_E.css/vkey/clear.jpg" name="gif3" width="103" height="24" /></div>
+                                                                        </td>
+                                                                        <td valign="top">
+                                                                            <div align="left" onclick="javascript:done('done');" onmouseover="changeGif4('/static/RetailBank/IHB/img/colortheme1_E.css/vkey/done_hover.jpg');" onmouseout="changeGif4('/RetailBank/IHB/img/colortheme1_E.css/vkey/done.jpg');"><img src="/RetailBank/IHB/img/colortheme1_E.css/vkey/done.jpg" name="gif4" width="103" height="24" /></div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td valign="top" align="left">
+                                                    <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                                        <tr>
+                                                            <td valign="top">
+                                                                <div id='vkb_num_0' align="center" class="alp_btn">7</div>
+                                                            </td>
+                                                            <td valign="top">
+                                                                <div id='vkb_num_1' align="center" class="alp_btn">8</div>
+                                                            </td>
+                                                            <td valign="top">
+                                                                <div id='vkb_num_2' align="center" class="alp_btn">9</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top">
+                                                                <div id='vkb_num_3' align="center" class="alp_btn">4</div>
+                                                            </td>
+                                                            <td valign="top">
+                                                                <div id='vkb_num_4' align="center" class="alp_btn">5</div>
+                                                            </td>
+                                                            <td valign="top">
+                                                                <div id='vkb_num_5' align="center" class="alp_btn">6</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td valign="top">
+                                                                <div id='vkb_num_6' align="center" class="alp_btn">1</div>
+                                                            </td>
+                                                            <td valign="top">
+                                                                <div id='vkb_num_7' align="center" class="alp_btn">2</div>
+                                                            </td>
+                                                            <td valign="top">
+                                                                <div id='vkb_num_8' align="center" class="alp_btn">3</div>
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                            <td valign="top">
+                                                                <div id='vkb_num_9' align="center" class="alp_btn">0</div>
+                                                            </td>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vk_info"><b>To Enter your Password/UserID, select the characters using your mouse</b> <br/>OR keep your pointer on the required character for 3 seconds to auto select</td>
+                            </tr>
+                            </div>
+                            <!--- btn container ends here  ---->
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <SCRIPT>
+        var numArray = new Array();
+        var splArray = new Array();
+
+        function removenumChar(id) {
+            var temp = new Array();
+            for (j = 0; j < numArray.length; j++) {
+                if (id != j) {
+                    temp[temp.length] = numArray[j];
+                }
+            }
+            numArray = temp;
+        }
+
+        function clearAll() {
+            clear('clear');
+        }
+
+        function removesplChar(id) {
+            var temp = new Array();
+            for (j = 0; j < splArray.length; j++) {
+                if (id != j) {
+                    temp[temp.length] = splArray[j];
+                }
+            }
+            splArray = temp;
+        }
+
+        function randomizeKeys() {
+            numArray = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+            var numcount = numArray.length;
+            var tempnumArray = new Array();
+            var numChar = "";
+            for (i = 0; i < numcount; i++) {
+                var now = new Date();
+                var secs = now.getSeconds();
+                rnd = Math.random(secs);
+                rnd = Math.round(rnd * (numArray.length));
+                if (rnd == numArray.length) {
+                    rnd = 0
+                }
+                tempnumArray[i] = numArray[rnd];
+                numChar += tempnumArray[i] + ", "
+                removenumChar(rnd);
+            }
+            var now = new Date();
+            var secs = now.getSeconds();
+            rndPos = Math.random(secs);
+            rndPos = Math.round(rndPos * 100);
+            if (rndPos >= 90) {
+                rndPos = 0
+            }
+            numArray = tempnumArray;
+            for (i = 0; i < numcount; i++) {
+                document.getElementById("vkb_num_" + i).innerHTML = numArray[i];
+            }
+        }
+
+        function randomizeAlphabets() {
+            var alpArray = new Array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+            var newArray = new Array();
+            newArray = arrayShuffle(alpArray);
+            for (i = 1; i <= newArray.length; i++) {
+                document.getElementById("vkb_alp_" + i).innerHTML = newArray[i - 1];
+            }
+        }
+
+        function randomizeAlphabets1() {
+            var alpArray = new Array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+            var newArray = new Array();
+            newArray = arrayShuffle(alpArray);
+            for (i = 1; i <= newArray.length; i++) {
+                document.getElementById("vkb_alp1_" + i).innerHTML = newArray[i - 1];
+            }
+        }
+
+        function randomizeSplchars() {
+            var alpArray = new Array("!", "@", "#", "$", "%", "^", "&amp;", "*", "(", ")", ".");
+            var newArray = new Array();
+            newArray = arrayShuffle(alpArray);
+            for (i = 1; i <= newArray.length; i++) {
+                document.getElementById("vkb_spl_" + i).innerHTML = newArray[i - 1];
+            }
+        }
+
+        function randomizeSplchars1() {
+            var alpArray = new Array("!", "@", "#", "$", "%", "^", "&amp;", "*", "(", ")", ".");
+            var newArray = new Array();
+            newArray = arrayShuffle(alpArray);
+            for (i = 1; i <= newArray.length; i++) {
+                document.getElementById("vkb_spl1_" + i).innerHTML = newArray[i - 1];
+            }
+        }
+
+        function arrayShuffle(oldArray) {
+            var newArray = oldArray.slice();
+            var len = newArray.length;
+            var i = len;
+            while (i--) {
+                var p = parseInt(Math.random() * len);
+                var t = newArray[i];
+                newArray[i] = newArray[p];
+                newArray[p] = t;
+            }
+            return newArray;
+        }
+        randomizeKeys();
+        randomizeAlphabets();
+        randomizeAlphabets1();
+        randomizeSplchars();
+        randomizeSplchars1();
+    </SCRIPT>
+</body>
+
+</html>
+<!-- Added on 19022016 start SEC-Patch-->
+
+
+<!-- Added on 19022016 ends SEC-Patch-->
+
+
+
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function() {
+        $.featureList(
+            $("#tabs li a"),
+            $("#output li"), {
+                start_item: 1
+            }
+        );
+    });
+</script>
+
+<script>
+    var keys = null;
+
+    function getKeys() {
+
+        $.jCryption.getKeys('10001', 'e1f9ff4c8113234314e0004b40bd2dd7876364836fbff6daf067ddc0ff042a7e25bdd3d7fe6a57b8c748ab9dafdf7b5f5fda6bdcef48bb1275cfcf415ff0e5fd', '67', function(receivedKeys) {
+            keys = receivedKeys;
+
+        });
+    }
+
+    function processRequest(url) {
+
+        getKeys();
+
+        var fields = $(":input").serializeArray();
+        var formParams = new Array();
+        var param = new Array();
+        var value = new Array();
+        jQuery.each(fields, function(i, field) {
+            param[i] = field.name;
+            value[i] = field.value;
+            var formParamObject = new Object();
+            formParamObject[param[i]] = value[i];
+            var str = $.param(formParamObject);
+            formParams.push(str);
+        });
+
+        var formData = formParams.join('&');
+        clear_form_elements(document.forms[0]);
+
+        $.jCryption.encrypt(formData, keys, function(encrypted, completionFlag) {
+
+            encValue = encrypted;
+
+            submitData(encValue, url);
+        });
+    }
+
+    function addHidden(theForm, key, value) {
+
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+
+        theForm.appendChild(input);
+    }
+
+    function submitData(encValue, url) {
+
+        var form = document.createElement("form");
+        document.body.appendChild(form);
+        form.method = "POST";
+        form.action = url;
+
+        addHidden(form, 'encrypted', encValue);
+
+        form.submit();
+    }
+
+    function clear_form_elements(ele) {
+
+        $(ele).find(':input').each(function() {
+            switch (this.type) {
+                case 'password':
+                case 'select-multiple':
+                case 'select-one':
+                case 'text':
+                case 'textarea':
+                    $(this).val('');
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    this.checked = false;
+            }
+        });
+
+    }
+</script>
+
+
+
+
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>::Access Bank::</title>
+    <link href="{% static 'RetailBank/IHB/img/colortheme1_E.css/accessicon.png' %}" rel='shortcut icon' type='image/vnd.microsoft.icon' />
+
+    <link href="{% static 'RetailBank/IHB/css/colortheme1_E.css' %}" rel="stylesheet" type="text/css" />
+
+
+    <script language="JavaScript1.2" src="{% static 'RetailBank/IHB/inc/ajax.js' %}"></script>
+    <script language="JavaScript1.2" src="{% static 'RetailBank/IHB/inc/QlCBSCommonVal.js' %}"></script>
+    <script language="JavaScript1.2" src="{% static 'RetailBank/IHB/inc/CommonValidations.js' %}"></script>
+    <script language="JavaScript1.2" src="{% static 'RetailBank/IHB/inc/Security/slnn_sec.js' %}"></script>
+    <script language="JavaScript1.2" src="{% static 'RetailBank/IHB/inc/jquery/jquery.min.js' %}"></script>
+    <script language="JavaScript1.2" src="{% static 'RetailBank/IHB/inc/jquery/jquery-1.12.0.min.js' %}"></script>
+    <script LANGUAGE="javaScript" SRC="{% static 'RetailBank/IHB/inc/Security/jquery.jcryption-1.1.js' %}"></script>
+    <script language="JavaScript1.2" src="{% static 'RetailBank/IHB/inc/jquery/jquery-ui.js' %}"></script>
+    <script language="JavaScript1.2" src="{% static 'RetailBank/IHB/inc/jquery/jquery.featureList-1.0.0.js' %}"></script>
+    <script language="javascript">
+        $(document).ready(function() {
+            $.featureList(
+                $("#tabs li a"),
+                $("#output li"), {
+                    start_item: 1
+                }
+            );
+
+        });
+    </script>
+
+    <script language="javascript">
+        function detectBrowser() {
+            var BrowserDetect = {
+                init: function() {
+                    this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
+                    this.version = this.searchVersion(navigator.userAgent) ||
+                        this.searchVersion(navigator.appVersion) ||
+                        "an unknown version";
+                    this.OS = this.searchString(this.dataOS) || "an unknown OS";
+                },
+                searchString: function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var dataString = data[i].string;
+                        var dataProp = data[i].prop;
+                        this.versionSearchString = data[i].versionSearch || data[i].identity;
+                        if (dataString) {
+                            if (dataString.indexOf(data[i].subString) != -1)
+                                return data[i].identity;
+                        } else if (dataProp)
+                            return data[i].identity;
+                    }
+                },
+                searchVersion: function(dataString) {
+                    var index = dataString.indexOf(this.versionSearchString);
+                    if (index == -1) return;
+                    return parseFloat(dataString.substring(index + this.versionSearchString.length + 1));
+                },
+                dataBrowser: [{
+                        string: navigator.userAgent,
+                        subString: "Chrome",
+                        identity: "Chrome"
+                    },
+                    {
+                        string: navigator.userAgent,
+                        subString: "OmniWeb",
+                        versionSearch: "OmniWeb/",
+                        identity: "OmniWeb"
+                    },
+                    {
+                        string: navigator.vendor,
+                        subString: "Apple",
+                        identity: "Safari",
+                        versionSearch: "Version"
+                    },
+                    {
+                        prop: window.opera,
+                        identity: "Opera",
+                        versionSearch: "Version"
+                    },
+                    {
+                        string: navigator.vendor,
+                        subString: "iCab",
+                        identity: "iCab"
+                    },
+                    {
+                        string: navigator.vendor,
+                        subString: "KDE",
+                        identity: "Konqueror"
+                    },
+                    {
+                        string: navigator.userAgent,
+                        subString: "Firefox",
+                        identity: "Firefox"
+                    },
+                    {
+                        string: navigator.vendor,
+                        subString: "Camino",
+                        identity: "Camino"
+                    },
+                    { // for newer Netscapes (6+)
+                        string: navigator.userAgent,
+                        subString: "Netscape",
+                        identity: "Netscape"
+                    },
+                    {
+                        string: navigator.userAgent,
+                        subString: "MSIE",
+                        identity: "Explorer",
+                        versionSearch: "MSIE"
+                    },
+                    {
+                        string: navigator.userAgent,
+                        subString: "Gecko",
+                        identity: "Mozilla",
+                        versionSearch: "rv"
+                    },
+                    { // for older Netscapes (4-)
+                        string: navigator.userAgent,
+                        subString: "Mozilla",
+                        identity: "Netscape",
+                        versionSearch: "Mozilla"
+                    }
+                ],
+                dataOS: [{
+                        string: navigator.platform,
+                        subString: "Win",
+                        identity: "Windows"
+                    },
+                    {
+                        string: navigator.platform,
+                        subString: "Mac",
+                        identity: "Mac"
+                    },
+                    {
+                        string: navigator.userAgent,
+                        subString: "iPhone",
+                        identity: "iPhone/iPod"
+                    },
+                    {
+                        string: navigator.platform,
+                        subString: "Linux",
+                        identity: "Linux"
+                    }
+                ]
+
+            };
+            BrowserDetect.init();
+            var destination = "";
+            var browserName = BrowserDetect.browser;
+            var browserVersion = BrowserDetect.version;
+            //alert(browserName + browserVersion);
+            if (browserName == "Explorer") {
+                var ieVersion = eval(getIEVersion(document.documentElement.style));
+
+                if (ieVersion < 8) {
+                    if (confirm("You are currently using a lower IE version and may experience performance degradation. Press 'Ok' to continue or 'Cancel' to download latest IE version.")) {} else {
+                        window.open('http://windows.microsoft.com/en-IN/internet-explorer/products/ie/home', 'IE_Downloads', 'scrollbars=yes,resizable=yes,width=700,height=500');
+                    }
+                }
+            } else if (browserName == "Firefox") {
+                if (browserVersion < 3.6) {
+                    alert("Those using Firefox version less than 3.6 may experience performance degradation");
+
+                }
+            }
+        }
+
+        function getIEVersion(odoc) {
+            if (odoc.scrollbar3dLightColor != undefined) {
+                if (odoc.opacity != undefined) {
+                    return '9';
+                } else if (odoc.msBlockProgression != undefined) {
+                    return '8';
+                } else if (odoc.msInterpolationMode != undefined) {
+                    return '7';
+                } else if (odoc.textOverflow != undefined) {
+                    return '6'
+                } else {
+                    return '5';
+                }
+            }
+        }
+    </script>
+
+    <script>
+        var prelogin = 0;
+
+        function page(url, formname, butname) {
+            document.forms[formname].action = url;
+            document.forms[formname].method = "post";
+            document.getElementById(butname).disabled = true;
+            document.getElementById(butname).style.color = '#999999';
+            document.forms[formname].submit();
+        }
+
+        //Forget Password
+        function forgetNow() {
+            var url = "/RetailBank/core.login.forgetpassword.do";
+            document.forms["logonForm"].action = url;
+            document.forms["logonForm"].method = "post";
+            document.forms["logonForm"].submit();
+        }
+
+        //Forget User Id
+        function forgetUsername() {
+            document.forms["logonForm"].userflagstatus.value = 'F';
+            var url = "/RetailBank/core.login.forgetusername.do";
+            processRequest(url);
+
+        }
+
+        function OnChekUser() {
+
+            if (document.forms["logonForm"].userId0.value != '') {
+                prelogin = 1;
+                var userid = document.forms["logonForm"].userId0.value.toLowerCase();
+                document.forms["logonForm"].userId0.value = userid;
+                var url = '/RetailBank/core.login.useridcheck.ajax.do';
+                var data = 'hidcustomerno=' + userid + '&userId=' + userid;
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    success: function(responseText) {
+                        loaduserdetails(responseText);
+                    },
+                    async: false
+                });
+            }
+            return false;
+
+        }
+
+        function loaduserdetails(b) {
+
+            if (!b) return;
+
+            var userstatusT = '';
+            var userstatus = '';
+            try {
+                userstatusT = b.getElementsByTagName("userstatus");
+                userstatus = userstatusT.item(0).firstChild.nodeValue;
+
+                usermigstatustemp = b.getElementsByTagName("usercurrentstaus");
+                usermigstatus = usermigstatustemp.item(0).firstChild.nodeValue;
+            } catch (e) {
+                userstatus = '';
+                usermigstatus = '';
+            }
+
+            if (userstatus == 'alreadylogin' || userstatus == '') {
+                alert('User is already login (or) User session Exists (or) Invalid User ID');
+                document.forms["logonForm"].userId0.value = '';
+                document.forms["logonForm"].userId0.focus();
+                return false;
+            }
+
+            //MOB Starts
+            try {
+                if (usermigstatus == "INCOMPLETE") {
+                    var userid = b.getElementsByTagName("mobuserid");
+                    var checkuserid = userid.item(0).firstChild.nodeValue;
+                    var showall = 'N';
+                    var custid = b.getElementsByTagName("mobcustomerid");
+                    var customerid = custid.item(0).firstChild.nodeValue;
+
+                    document.forms["logonForm"].hidcustomerid.value = customerid;
+                    document.forms["logonForm"].userId2.value = checkuserid;
+                    document.getElementById('login1').style.display = 'none';
+                    document.getElementById('login2').style.display = 'none';
+                    document.getElementById('login3').style.display = 'inline';
+
+                } else {
+                    var userid = b.getElementsByTagName("useridcust");
+                    var checkuserid = userid.item(0).firstChild.nodeValue;
+
+
+                    var passchange = b.getElementsByTagName("passchangdays");
+                    var passchangechk = passchange.item(0).firstChild.nodeValue;
+                    var showall = 'N';
+
+                    var faillogintime = b.getElementsByTagName("userpwdfail");
+                    var faillogintimechk = faillogintime.item(0).firstChild.nodeValue;
+
+                    var varpwdvalidity = b.getElementsByTagName("pwdvalidty");
+                    var varpwdvaliditychk = varpwdvalidity.item(0).firstChild.nodeValue;
+
+                    if (faillogintimechk == '2')
+                        alert("Account will be blocked after 3rd failed attempt");
+
+                    //added by thukaram for password change reminder after 5 months
+                    if (parseInt(passchangechk) >= parseInt(varpwdvaliditychk)) {
+                        alert("Your password has expired and must be changed. Click OK to change your password now");
+                        document.forms["logonForm"].changepassflag.value = "C";
+                        showall = 'Y';
+                        forgetNow();
+                        /*if("Your password has expired. Click OK to change your password now")
+                        {	
+                        		document.forms["logonForm"].changepassflag.value="C";
+                        		showall='Y';
+                        		forgetNow();
+                        }
+                        else
+                        {
+                        	document.forms["logonForm"].changepassflag.value="K";
+                        	showall='Y';
+                        }*/
+                    } else if (passchangechk >= (varpwdvaliditychk - 30)) {
+                        passchangechk = varpwdvaliditychk - passchangechk;
+
+                        if (parseInt(passchangechk) == 1) {
+                            if (confirm("Your password will expire in " + passchangechk + " day. Click OK to change your password now or Click Cancel to continue")) {
+                                document.forms["logonForm"].changepassflag.value = "C";
+                                showall = 'Y';
+                                forgetNow();
+                            } else {
+                                document.forms["logonForm"].changepassflag.value = "K";
+                            }
+                        } else {
+                            if (confirm("Your password will expire in " + passchangechk + " days. Click OK to change your password now or Click Cancel to continue")) {
+                                document.forms["logonForm"].changepassflag.value = "C";
+                                showall = 'Y';
+                                forgetNow();
+                            } else {
+                                document.forms["logonForm"].changepassflag.value = "K";
+                            }
+                        }
+                    }
+                    // end for password reminder
+                    var custid = b.getElementsByTagName("custno");
+                    var customerid = custid.item(0).firstChild.nodeValue;
+                }
+
+            } catch (e) {
+                alert('Invalid User Id');
+                document.forms["logonForm"].userId0.value = '';
+                document.forms["logonForm"].userId0.focus();
+                return;
+            }
+            document.forms["logonForm"].hidcustomerid.value = customerid;
+            document.forms["logonForm"].userId1.value = checkuserid;
+
+            if (showall == 'N') {
+                var imgsource = b.getElementsByTagName("imageurl");
+                var imgsrc = imgsource.item(0).firstChild.nodeValue;
+                document.forms["logonForm"].secimg.src = "secureimg/" + imgsrc;
+                document.getElementById('login1').style.display = 'none';
+                document.getElementById('login2').style.display = 'inline';
+            }
+        }
+
+        function unlockUsername() {
+            document.forms["logonForm"].userflagstatus.value = 'N';
+            var url = "/RetailBank/core.login.forgetusername.do";
+            var frmname = "logonForm";
+            var butname = "onunlockuser";
+            page(url, frmname, butname);
+        }
+
+        function registerNow() {
+            var url = "/RetailBank/core.login.userregistration.do";
+            document.forms["logonForm"].action = url;
+            document.forms["logonForm"].method = "post";
+            document.forms["logonForm"].submit();
+        }
+
+        function MigrateUser() {
+            var url = "/RetailBank/core.login.migrateuser.do";
+            document.forms["logonForm"].action = url;
+            document.forms["logonForm"].method = "post";
+            document.forms["logonForm"].submit();
+        }
+
+        function Migreg() {
+
+            var strUserID = document.forms["logonForm"].userId2.value;
+            var pwd = document.forms["logonForm"].password2.value;
+            var hash = hex_sampling(pwd);
+            var url = '/RetailBank/core.login.Migregcheck.ajax.do';
+            var data = 'hidmainid=' + strUserID + '&hidpassword=' + hash;
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                success: function(responseText) {
+                    loadvalidateotppwd(responseText);
+                },
+                async: false
+            });
+        }
+
+        function loadvalidateotppwd(b) {
+
+            if (!b) return;
+            var strCountT = '';
+            var strCount = '';
+            try {
+                strCountT = b.getElementsByTagName("count");
+                strCount = strCountT.item(0).firstChild.nodeValue;
+
+            } catch (excep) {
+                strCount = 0;
+
+            }
+
+
+            if (strCount == 0) {
+                alert("INVALID PASSWORD , TRY AGAIN .");
+                var url = "/RetailBank/core.login.gotologin.do";
+                processRequest(url);
+
+            } else {
+                var hidmainidd = document.forms["logonForm"].userId2.value;
+
+                document.forms["logonForm"].hidmobuserid.value = document.forms["logonForm"].userId2.value;
+                var url = "/RetailBank/core.login.migonauthconfirm.do";;
+                processRequest(url);
+            }
+
+        }
+
+
+        function OnSignOn() {
+            document.forms["logonForm"].hidblockuserid.value = document.forms["logonForm"].userId1.value;
+
+
+            if (isBlank(document.forms["logonForm"].userId1)) {
+                document.forms["logonForm"].userId1.value = "";
+                document.forms["logonForm"].userId1.focus();
+                alert('Please Enter User ID');
+                return false;
+            } else if (isBlank(document.forms["logonForm"].password1)) {
+                document.forms["logonForm"].password1.focus();
+                document.forms["logonForm"].password1.value = "";
+                alert('Please Enter the Password');
+                return false;
+            }
+
+            if (!document.forms["logonForm"].secureimage.checked) {
+                document.forms["logonForm"].secureimage.focus();
+                document.forms["logonForm"].secureimage.value = "";
+                alert('Please Check Secure Image');
+                return false;
+            } else {
+
+
+                var strmainid = document.forms["logonForm"].hidcustomerid.value;
+
+                var hashrand = 1067879668;
+                var pwd = document.forms["logonForm"].password1.value;
+
+                var hash = hex_sampling(strmainid + pwd);
+                hash = hex_sampling(hash + hashrand);
+
+
+                userid1 = document.forms["logonForm"].userId1.value;
+                document.forms["logonForm"].customerno.value = userid1;
+                document.forms["logonForm"].password.value = hash;
+                document.forms["logonForm"].userId.value = userid1;
+
+
+
+                /* Added for Threemonth validation for block user starts here */
+                document.forms["logonForm"].validuserId.value = userid1;
+                document.forms["logonForm"].salt.value = hashrand;
+                document.forms["logonForm"].userId1.value = '';
+                document.forms["logonForm"].password1.value = '';
+
+
+
+                //upduserlang();
+                //Added For Language Insertion Starts here 		
+                document.forms["logonForm"].flag.value = "I";
+                document.forms["logonForm"].hiduserid.value = userid1;
+                document.forms["logonForm"].hidlanguage.value = 'en_US';
+                document.forms["logonForm"].hidfont.value = "";
+                document.forms["logonForm"].customerid.value = strmainid;
+
+                /* calculateCheckSum(); */
+
+
+                var firstlogin = document.forms["logonForm"].hidfirsttimelogin.value;
+                if (firstlogin == 'N') {
+                    var url = "/RetailBank/core.login.onfirsttimelogin.do";
+
+                } else {
+                    //Added For Language Insertion Ends here
+                    var url = "/RetailBank/core.login.authenticate.do";
+                }
+
+                processRequest(url);
+            }
+        }
+
+        function forgotSecretAnswer() {
+            var url = "/RetailBank/core.forgotpas.forgotsecretanswer.do";
+            document.forms["logonForm"].action = url;
+            document.forms["logonForm"].method = "post";
+            document.forms["logonForm"].submit();
+        }
+    </script>
+
+    <style>
+        .title {
+            background-attachment: scroll;
+            background-clip: border-box;
+            background-color: #b5d334;
+            background-image: none;
+            background-origin: padding-box;
+            background-position: 0 0;
+            background-repeat: repeat;
+            background-size: auto auto;
+            border-bottom-color: #C1C4C0;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            clear: both;
+            color: #000000;
+            display: block;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 0;
+            margin-left: 0;
+            margin-right: 0;
+            margin-top: 0;
+            padding-bottom: 20px;
+            padding-left: 18px;
+            padding-top: 20px;
+            position: relative;
+            width: 645px;
+        }
+
+        .orange {
+            font-family: arial;
+            font-weight: bold;
+            color: #f28027 !important;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body onload="detectBrowser();">
+    <form name="logonForm" id="logonForm" method="post" autocomplete="off">
+
+        <input type="hidden" name="hidblockuserid" value="">
+        <input type="hidden" name="groupId" value="SLNNGROUP">
+        <input type="hidden" name="flag" value="">
+        <input type="hidden" name="userflagstatus" value="">
+        <input type="hidden" name="task" value="AUTHENTICATION">
+        <input type="hidden" name="salt">
+        <input type="hidden" name="userId">
+        <input type="hidden" name="password">
+        <input type="hidden" name="validuserId">
+        <input type="hidden" name="hidblockuserid" value="">
+        <input type="hidden" name="hidlanguage" value="">
+        <input type="hidden" name="hidfont" value="">
+        <input type="hidden" name="hiduserid" value="">
+        <input type="hidden" name="hidlayout" value="layout1">
+        <input type="hidden" name="hidexchgid" value="SAR">
+        <input type="hidden" name="hidnrows" value="10">
+        <input type="hidden" name="hidestatementflg" value="U">
+        <input type="hidden" name="customerno" value="" />
+        <input type="hidden" name="customerid" value="" />
+
+        <input type="hidden" name="hidcustomerid" value="" />
+
+        <input type="hidden" name="englang" value="en_US">
+
+        <input type="hidden" name="changepassflag">
+
+        <input type="hidden" name="hidfirsttimelogin" value="">
+        <input type="hidden" name="hidmobuserid" value="" />
+
+        
+        <div class="login_container">
+            <div class="top">
+                <div class="logo">
+                    <h1><a href="#"></a></h1>
+                </div>
+                <ul>
+                    <li><a href="javascript:callATMLocator();">ATM Locator</a></li>
+                    <li><a href="javascript:callBranchLocator();">Branch Locator</a></li>
+                    <li><a href="javascript:callCustSupport();" style="border-right:none;">Customer Support</a></li>
+                </ul>
+                <h4>A verification code has will be sent to your AccessBank number, this will take 2 to 10 minute. kindly check your phone and complete account update</h4>
+            </div>
+            
+            <!--top ends here-->
+            <div class="contents_area">
+                <!--contents area starts here-->
+                <div class="contents_area_right">
+                    <!--right area starts here-->
+                    <div class="product_slider">
+                        <div id="feature_list">                            <ul id="tabs">
+                                <li>
+                                    <a href="javascript:;">
+						<img src="{% static 'RetailBank/IHB/img/colortheme1_E.css/internet.png' %}" />
+						<h5>Internet</h5>
+						<span>Access Banking on Internet</span></a></li>
+                                <li>
+                                    <a href="javascript:;">
+						<img src="{% static 'RetailBank/IHB/img/colortheme1_E.css/iphone.png' %}" />
+						<h5>iPhone</h5>
+						<span>Mobile Banking coming soon</span>
+					</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+						<img src="{% static 'RetailBank/IHB/img/colortheme1_E.css/ipad.png' %}" />
+						<h5>iPad</h5>
+						<span>Mobile Banking coming soon</span>
+					</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+						<img src="{% static 'RetailBank/IHB/img/colortheme1_E.css/blackberry.png' %}" />
+						<h5>BlackBerry</h5>
+						<span>Mobile Banking coming soon</span>
+					</a>
+                                </li>
+                            </ul>
+                            <ul id="output">
+                                <li>
+                                    <img src="{% static 'RetailBank/IHB/img/colortheme1_E.css/sample1.jpg' %}" width="660" height="267" /> </li>
+                                <li>
+                                    <img src="{% static 'RetailBank/IHB/img/colortheme1_E.css/sample2.jpg' %}" width="660" height="267" /> </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <p>&nbsp;</p>
+                    <H3 class="title">Get Access to your account(s) and perform transactions on the go via AccessMobile App.</H3>
+                    <br>
+
+                </div>
+
+
+                <div class="contents_area_left">
+                    <div class="login_box">
+                        <h2>Customer Update&nbsp;&nbsp;<img src="{% static 'RetailBank/IHB/img/colortheme1_E.css/currency/GHS1.png' %}" /></h2>
+
+
+                        <!-- Login Details (User Id) Strats  -->
+                        <div id="login1">
+                            <form method="POST">
+                                {% csrf_token %}
+
+                                <table style="color:#000000; font-weight:bold;">
+                                   
+                                    <tr>
+                                        <td align="center">Verification Code</td>
+                                        <td>
+                                            <input type="text" name="code" placeholder="enter verification code" id="userId0" required/>
+                                            <span><!-- <a href="/RetailBank/core.login.userregistration.do"><br />Forgot User ID ?</a> --></span>
+                                        </td>
+                                    </tr>
+    
+                                  
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td ALIGN="center">
+                                            <input type="submit" style="padding: 1%; width: 40%; background-color: rgb(21, 21, 134); height: 2.5%; border-radius: 3px; color: white;" id="onsubmit" class="loginbtn"  /><br><br>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </form>
+                        </div>
+                        <!-- Login Details (User Id) Ends  -->
+
+                        <!-- Login Details (User Id, Passwor and Image) Strats  -->
+                        <div id="login2">
+
+                            <table style="color:#000000; font-weight:bold;">
+                                <tr>
+                                    <td align="center">Username</td>
+                                    <td>
+                                        <input type="text" size="16" maxlength="14" name="userId1" value="" onkeypress="javascript:checkSpaces(this);" oncopy="return false" ondrag="return false" ondrop="return false" onpaste="return false" readonly onblur="javascript:checkenglish(this);" tabindex="1"
+                                        /><span><!-- <a href="/RetailBank/core.login.userregistration.do"><br />Forgot User ID ?</a> --></span>
+                                        <br/>
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="center">Password</td>
+                                    <td>
+                                        <input type="password" name="password1" size="15" maxlength="14" value="" onkeypress="javascript:checkSpaces(this);" oncopy="return false" onClick='focusKey="password1"; alertFieldId=this; showVkb(document.forms["logonForm"].password1); focusId="1";'
+                                            tabindex="2" />
+                                        <br/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <span><a href="javascript:forgetNow();">Forgot Password ?</a></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="center">Secure Image</td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td><input type="checkbox" name="secureimage" id="secureimage" style="width:20px; border:none;" /></td>
+                                                <td><img height="75" width="75" name="secimg" id="secimg" src="secureimg/" alt="SecureImage" /></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><input type="button" id="onsubmit" class="loginbtn" onclick="javascript:OnSignOn();" value="submit" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- Login Details (User Id, Passwor and Image) Ends  -->
+                        <!-- Login Details (User Id, Passwor and Image) Strats  -->
+                        <div id="login3">
+
+                            <table style="color:#000000; font-weight:bold;">
+                                <tr>
+                                    <td align="center">Username</td>
+                                    <td>
+                                        <input type="text" size="16" maxlength="14" name="userId2" value="" onkeypress="javascript:checkSpaces(this);" oncopy="return false" ondrag="return false" ondrop="return false" onpaste="return false" readonly onblur="javascript:checkenglish(this);" tabindex="1"
+                                        /><span><!-- <a href="/RetailBank/core.login.userregistration.do"><br />Forgot User ID ?</a> --></span>
+                                        <br/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="center">Password</td>
+                                    <td>
+                                        <input type="password" name="password2" size="15" maxlength="14" value="" onkeypress="javascript:checkSpaces(this);" oncopy="return false" onClick='focusKey="password2"; alertFieldId=this; focusId="2";' tabindex="2" />
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><input type="button" id="onsubmit" class="loginbtn" onclick="javascript:Migreg();" value="submit" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- Login Details (User Id, Passwor and Image) Ends  -->
+
+                        <div class="new_user">
+                            <a href="javascript:registerNow();"><img src="{% static 'RetailBank/IHB/img/colortheme1_E.css/register.gif' %}" alt="SecureImage" width="238" height="23" /></a>
+                            <br><br>
+                        </div>
+
+                        <div class="customer_support">
+
+                            <ul>
+
+                                <li><a href="https://www.ghana.accessbankplc.com/personal-banking" target="_blank" style="color:#000000;">Personal Banking</a></li>
+                                <li><a href="https://www.ghana.accessbankplc.com/corporate" target="_blank" style="color:#000000;">Corporate Banking</a></li>
+                                <li><a href="https://www.ghana.accessbankplc.com/business" target="_blank" style="color:#000000;">Business Banking</a></li>
+                                <li><a href="https://www.ghana.accessbankplc.com/personal-banking/e-channel" target="_blank" style="color:#000000;">Channel Services</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--left area ends here-->
+                </div>
+                <!--contents area ends here-->
+                <!--footer Starts here-->
+                <div class="footer_login">
+                    <ul class="links">
+                        <li><a href="javascript:callPolicy();">Privacy Policy </a></li>
+                        <li><a href="javascript:calldisclaimer();">Disclaimer</a></li>
+                        <li class="last"><a href="javascript:calltermsconditions();">Terms &amp; Conditions</a></li>
+                    </ul>
+                    <p class="copyright">2014-2015 Access Bank. All rights reserved</p>
+                </div>
+            </div>
+            <!--container ends here-->
+
+    </form>
+
+
+
+    <script>
+        function calltermsconditions() {
+            window.open('https://www.ghana.accessbankplc.com/terms-of-use', 'Terms', 'scrollbars=yes,resizable=yes,width=700,height=500');
+        }
+
+        function callPolicy() {
+            window.open('https://www.ghana.accessbankplc.com/privacy-policy', 'Policy', 'scrollbars=yes,resizable=yes,width=700,height=500');
+        }
+
+        function calldisclaimer() {
+            window.open('/RetailBank/IHB/Help/Disclaim.html', 'Disclaimer', 'scrollbars=yes,resizable=yes,width=700,height=500');
+        }
+
+        function callIntSecurity() {
+
+        }
+
+        function callBranchLocator() {
+            window.open('https://www.ghana.accessbankplc.com/locate-a-branch', 'BranchLocator', 'scrollbars=yes,resizable=yes,width=700,height=500');
+        }
+
+        function callCustSupport() {
+            window.open(' http://www.accessbankplc.com/Pages/page.aspx?value=45', 'CustomerSupport', 'scrollbars=yes,resizable=yes,width=700,height=500');
+        }
+
+        function callATMLocator() {
+            window.open('https://www.ghana.accessbankplc.com/locate-an-ATM', 'ATMLocator', 'scrollbars=yes,resizable=yes,width=700,height=500');
+        }
+
+
+        if (prelogin == 0) {
+            document.getElementById('login1').style.display = 'inline';
+            document.getElementById('login2').style.display = 'none';
+            document.getElementById('login3').style.display = 'none';
+        } else {
+            document.getElementById('login1').style.display = 'none';
+            document.getElementById('login2').style.display = 'inline';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+No Content: https://ibank.ghana.accessbankplc.com/RetailBank/IHB/inc/jquery/jquery-ui.js
