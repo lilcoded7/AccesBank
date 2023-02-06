@@ -1,0 +1,24 @@
+[{
+    "name": "user-credentials",
+    "icon": "icon-subscription",
+    "module": "registration"
+}, {
+    "name": "locator",
+    "icon": "icon-location-arrow",
+    "module": "locator"
+}, {
+    "name": "help",
+    "icon": "icon-help",
+    "type": "FUNCTION",
+    "default": true,
+    "functionName": "openWebHelpWindow"
+}, {
+    "name": "about",
+    "icon": "icon-information",
+    "default": true,
+    "type": "MODAL"
+},{
+    "name": "oracle-live",
+    "icon": "icon-help",
+    "module": "oracle-live"
+}]

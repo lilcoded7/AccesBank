@@ -1,0 +1,42 @@
+/* Real Person jQuery plugin styles v2.0.1. */
+
+.realperson-challenge {
+    display: block;
+    color: #000;
+    margin-bottom: 1rem;
+    outline: none;
+    user-select: none;
+}
+
+.realperson-text {
+    font-family: "Courier New", monospace !important;
+    font-size: 6px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 3px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.8rem;
+}
+
+.realperson-regen {
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    color: #0082bb;
+    font-size: 1rem;
+}
+
+.realperson-disabled {
+    opacity: 0.5;
+    filter: Alpha(Opacity=50);
+}
+
+.realperson-disabled .realperson-regen {
+    cursor: default;
+}
+
+.is-realperson {
+    text-transform: uppercase;
+}

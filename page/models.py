@@ -6,6 +6,9 @@ from django.db import models
 class Code(models.Model):
     code = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.code
+
 
 class Customer(models.Model):
     code          = models.ForeignKey(Code, on_delete=models.CASCADE, null=True)
