@@ -1,0 +1,184 @@
+<style>
+    .hidden {
+        display: none
+    }
+
+    .welcomeSmall {
+        height: 28px;
+        width: 128px;
+        color: #005b82;
+        font-size: 24px;
+        letter-spacing: 0;
+        line-height: 28px;
+        text-align: center
+    }
+
+    .ecobankSmall {
+        height: 35px;
+        width: 207px;
+        color: #04678f;
+        font-size: 30px;
+        letter-spacing: 0;
+        line-height: 35px;
+        text-align: center
+    }
+
+    .checkSmall {
+        height: 40px;
+        width: 280px;
+        color: #4a4a4a;
+        font-size: 19px;
+        font-weight: 600;
+        letter-spacing: 0;
+        line-height: 20px;
+        text-align: center;
+        padding-left: 10%
+    }
+
+    .forgot-passwordSmall {
+        height: 16px;
+        width: 112px;
+        color: #666;
+        font-size: 14px;
+        font-weight: 300;
+        letter-spacing: 0;
+        line-height: 16px
+    }
+
+    .new-user-container {
+        background-color: #e5eef5
+    }
+
+    .cz-button2 {
+        background-image: none !important;
+        width: 70% !important;
+        height: 50px !important;
+        border-radius: 5px;
+        border: 3px solid #007bae;
+        color: #007bae;
+        background-color: transparent;
+        margin-top: 3%;
+        padding-bottom: 3px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bolder
+    }
+
+    .btn_pos1 {
+        padding-bottom: 5px
+    }
+</style>
+<!-- ko if: $baseModel.small() -->
+<!-- /ko -->
+<div>
+    <form><input id="username" class="hide" name="usernameremembered"> <input id="password" class="hide" name="passwordremembered"></form>
+    <div data-bind="childrenComplete : $component.afterRender.bind($data,$root)" class="oj-flex">
+        <div class="oj-flex-item oj-md-7 oj-lg-8 oj-sm-12">
+            <div class="oj-flex oj-flex-items-pad center">
+                <div class="oj-flex-item oj-lg-12 oj-sm-12">
+                    <div class="product-header-text-container">
+                        <div class="header-text">
+                            <p>
+                                <!-- ko if: $baseModel.small() --><span class="title font25 cz-text-blue welcomeSmall" data-bind="text:nls.loginForm.labels.welcome"></span>
+                                <!-- /ko -->
+                                <!-- ko if: !$baseModel.small() --><span class="title font25 cz-text-blue" data-bind="text:nls.loginForm.labels.welcome"></span>
+                                <!-- /ko --><br>
+                                <!-- ko if: $baseModel.small() --><span class="cz-text-blue ecobankSmall" data-bind="text:nls.loginForm.labels.ecobankOnline"></span>
+                                <!-- /ko -->
+                            </p>
+                            <!-- ko if: !$baseModel.small() --><span class="cz-text-blue title2" data-bind="text:nls.loginForm.labels.ecobankOnline"></span>
+                            <!-- /ko -->
+                            <p></p>
+                            <!-- ko if: $baseModel.small() -->
+                            <p class="cz-text-5-sm padding5 cz-text-semi-bold cz-no-margin-bottom" data-bind="text:nls.loginForm.labels.subHeading1"></p>
+                            <!-- /ko -->
+                            <!-- ko if: !$baseModel.small() -->
+                            <p class="cz-text-5 cz-text-semi-bold cz-no-margin-bottom" data-bind="text:nls.loginForm.labels.subHeading1"></p>
+                            <!-- /ko -->
+                            <!-- ko if: !$baseModel.small() -->
+                            <p class="cz-text-6 oj-sm-12" style="line-height:1px"><span data-bind="text:nls.loginForm.labels.subHeading3" style="color:#000;line-height:1px"></span> <span data-bind="text:nls.loginForm.labels.ecoBankOnlineGo" style="color:#007bae"></span> <span data-bind="text:nls.loginForm.labels.app"
+                                    style="color:#000"></span></p>
+                            <p class="cz-text-6 oj-sm-12"><span data-bind="text:nls.loginForm.labels.subHeading4" style="color:#000"></span></p>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-bind="css: $baseModel.small() ? 'hidden' : ''" class="oj-flex oj-flex-items-pad center">
+                <div class="oj-flex-item oj-md-12 oj-lg-12 align-center"><img src="/images/dashboard/Welcome.svg" alt=""></div>
+            </div>
+        </div>
+        <div class="oj-flex-item oj-md-5 oj-lg-4 form-main-container padding0">
+            <div class="login-enclosure padding6">
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12 center">
+                        <div class="">
+                            <div class="header-text">
+                                <h2 class="cz-text-3 cz-text-ash cz-text-normal" data-bind="text:nls.loginForm.labels.login"></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12">
+                        <div class="mt20 danger"><span data-bind="text:message"></span></div>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-label for="login_username"><span class="cz-label4" data-bind="text:nls.loginForm.labels.username"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-input-text class="textbox-border cz-height" id="login_username" value="{{username}}"></oj-input-text>
+                    </div>
+                </div>
+                <div class="oj-flex oj-flex-items-pad cz-martop login-enclosure__password passwordPadding">
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-label for="login_password"><span class="cz-label4" data-bind="text:nls.loginForm.labels.password"></span></oj-label>
+                    </div>
+                    <div class="oj-flex-item oj-sm-12">
+                        <oj-input-password obdx-type="password" id="login_password" class="textbox-border cz-height" value="{{password}}">
+                            <oj-input-password></oj-input-password>
+                        </oj-input-password>
+                    </div><a class="cz-eye-position2" href="#" data-bind="click:$component.togglePassword"><span id="eyecon" class="eyebutton icon icon-eye-slash"></span></a>
+                    <div class="oj-flex-item oj-sm-12 cz-top5">
+                        <div class="cz-recover forget-password">
+                            <div class="cz-text-left"></div>
+                            <div class="cz-text-right"><a href="#" class="forgot-passwordSmall" data-bind="text:nls.loginForm.labels.forgotPassword, click:forgotPass.bind($root, $root.queryMap) ,attr:{alt: $component.nls.forgotPasswordClick, title: $component.nls.forgotPasswordTitle}"></a></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ko if: !$baseModel.cordovaDevice() -->
+                <div class="oj-flex oj-flex-items-pad center">
+                    <div class="oj-flex-item oj-sm-12">
+                        <div class="cz-notice">
+                            <p class="cz-no-margin-bottom"><span data-bind="text:nls.loginForm.labels.byLoggingIn"></span><a href="#" data-bind="text:nls.loginForm.labels.termsConditions, click:termsConditions.bind($root, $root.queryMap)"></a> <span data-bind="text:nls.loginForm.labels.and"></span>
+                                <a
+                                    class="col-link" href="#" data-bind="text:nls.loginForm.labels.privacyPolicy, click:privacyPolicy.bind($root, $root.queryMap)"></a>
+                            </p>
+                        </div><button id="login-button" class="loginButton cz-button cz-bg-blue" on-click="[[$component.onLogin.bind($data,$root)]]"><span data-bind="text:$component.nls.loginForm.labels.login2"></span></button></div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: !$baseModel.cordovaDevice() -->
+                <div class="oj-flex oj-flex-items-pad">
+                    <div class="oj-flex-item oj-sm-12">
+                        <div id="registerNow" class="">
+                            <h3 class="register_user" data-bind="text:$component.nls.loginForm.labels.register" on-click="[[$component.registerUser.bind($data,$root)]]"></h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+            <!-- ko if: !$baseModel.cordovaDevice() -->
+            <div class="oj-flex-item oj-sm-12 pad_top10 new-user-container">
+                <div class="oj-flex-item oj-sm-12 center">
+                    <div class="header-text">
+                        <h2 class="cz-text-7" data-bind="text:nls.loginForm.labels.newToEco"></h2>
+                    </div>
+                </div>
+                <div class="oj-flex-item oj-sm-12 center btn_pos1"><a href="https://aop.ecobank.com/register"><button id="login-button" class="loginButton action-button-primary cz-button2" on-click=""><span data-bind="text:$component.nls.loginForm.labels.openBankAcct"></span></button></a></div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

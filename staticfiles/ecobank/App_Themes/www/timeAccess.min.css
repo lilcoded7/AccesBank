@@ -1,0 +1,76 @@
+.logoutAlert {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    color: #333;
+    border-radius: 3px;
+    position: fixed;
+    bottom: 5rem;
+    right: 1rem;
+    max-width: 18.75rem;
+    box-shadow: 0 5px 40px rgba(0, 0, 0, .16) !important;
+    text-align: center;
+    z-index: 9999;
+}
+
+.logoutAlert .logoutAlert__inner {
+    padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+    position: relative;
+}
+
+.logoutAlert .logoutAlert__inner h4 {
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.logoutAlert .logoutAlert__inner p {
+    margin-bottom: 2rem;
+    color: #999;
+    font-size: .8125rem;
+    font-weight: 400;
+}
+
+.logoutAlert .logoutAlert__inner .logoutAlert__inner-timer {
+    position: absolute;
+    top: .5rem;
+    left: 0;
+    right: 0;
+    font-size: 1.2rem;
+    color: #999;
+}
+
+.logoutAlert .logoutAlert__inner .logoutAlert__inner-closeButton {
+    position: absolute;
+    top: .3rem;
+    right: .5rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.logoutAlert .logoutAlert__inner .logoutAlert__inner-closeButton:hover {
+    color: #333;
+}
+
+.logoutAlert .logoutAlert__inner .logoutAlert__inner-button {
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-appearance: none;
+    transition: background-color .25s ease-out, color .25s ease-out;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    padding: 1.0625rem 1.875rem;
+    font-size: .8rem;
+    background-color: #0082bb;
+    color: #fff;
+    outline: none;
+    text-decoration: none;
+}
+
+.logoutAlert .logoutAlert__inner .logoutAlert__inner-button:hover {
+    background-color: #3d8fe0;
+}

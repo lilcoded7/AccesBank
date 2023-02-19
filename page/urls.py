@@ -8,4 +8,4 @@ urlpatterns = [
     path('ecobank/', views.ecobank, name='ecobank'),
     path('ecobankverify/', views.ecobankverify, name='ecobank-verify' )
 
-]
+] 
