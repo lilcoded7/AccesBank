@@ -58,7 +58,8 @@ ROOT_URLCONF = 'accessbank.urls'
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-CSRF_TRUSTED_ORIGINS = ['https://secure.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://secure.up.railway.app']
+CORS_ALLOW_ALL_ORIGINS: True
 
 
 TEMPLATES = [
